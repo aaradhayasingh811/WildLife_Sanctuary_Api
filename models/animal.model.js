@@ -45,7 +45,7 @@ const AnimalSchema = new mongoose.Schema({
     },
     gpsLocation: {
       type: [Number],
-      required: true, // GPS coordinates [longitude, latitude]
+      // required: true, // GPS coordinates [longitude, latitude]
     },
     populationStats: {
       type: Object,
