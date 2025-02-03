@@ -11,7 +11,7 @@ import {
   addAnimalController,
   deleteAnimalController,
   allEndangeredController,
-  filterbyEndangeredStatusController
+  filterbyEndangeredStatusController,
 } from "../controllers/wildlife.controllers.js";
 
 WildlifeRoute.route("/wildlife").get(getAllAnimalsController);
@@ -27,11 +27,13 @@ WildlifeRoute.route("/delete-wildlife/:animalId").delete(
 );
 
 // unique feature endpoint gps
-WildlifeRoute.route("/wildlife/gps-tracking/:animalId").get();  //gps tracking
-WildlifeRoute.route("/wildlife/population-stats").get();      //Get population trends of species
-WildlifeRoute.route("/wildlife/health-check").post();       //ai based health check up
+WildlifeRoute.route("/wildlife/gps-tracking/:animalId").get(); //gps tracking
+WildlifeRoute.route("/wildlife/population-stats").get(); //Get population trends of species
+WildlifeRoute.route("/wildlife/health-check").post(); //ai based health check up
 WildlifeRoute.route("/wildlife/endangered").get(allEndangeredController);
-WildlifeRoute.route("/wildlife/filter/:endangeredStatus").get(filterbyEndangeredStatusController);      //filter
+WildlifeRoute.route("/wildlife/filter/:endangeredStatus").get(
+  filterbyEndangeredStatusController
+); //filter
 WildlifeRoute.route("/wildlife/paginated").get();
 
 export { WildlifeRoute };

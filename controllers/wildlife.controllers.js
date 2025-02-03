@@ -4,7 +4,7 @@ import jwt from "jsonwebtoken";
 import { v4 as uuidv4 } from "uuid";
 const getAllAnimalsController = async (req, res) => {
   try {
-    const animals = await Animal.find();
+    const animals = await Animal.find({});
     if (animals.length == 0) {
       return res.status(404).json({ message: "No animals found" });
     }

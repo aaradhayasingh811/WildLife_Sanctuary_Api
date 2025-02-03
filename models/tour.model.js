@@ -1,6 +1,10 @@
 import mongoose from "mongoose";
 
 const TourSchema = new mongoose.Schema({
+    userId:{
+      type:mongoose.Schema.Types.ObjectId,
+      ref:"User"
+    },
     tourId: {
       type: String,
       unique: true,
@@ -9,6 +13,10 @@ const TourSchema = new mongoose.Schema({
     title: {
       type: String,
       required: true, // Tour title
+    },
+    numberOfPerson:{
+      type:Number,
+      required:true,
     },
     description: {
       type: String,
@@ -20,11 +28,13 @@ const TourSchema = new mongoose.Schema({
     },
     price: {
       type: Number,
+      default : 500,
       required: true, // Price per person
     },
     availableSpots: {
       type: Number,
-      required: true, // Number of available spots
+      default:10
+      // Number of available spots
     },
     schedule: {
       type: Date,
@@ -33,6 +43,10 @@ const TourSchema = new mongoose.Schema({
     guide: {
       type: String,
       required: true, // Tour guide's name
+    },
+    status:{
+      type:String,
+      enum :["Booked","Cancelled"]
     },
     reviews: [{
       userId: {

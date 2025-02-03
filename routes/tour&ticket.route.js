@@ -1,13 +1,25 @@
 import { Router } from "express";
+import {authMiddleware , authorizeRoles} from "../middlewares/authMiddleware.js"
 const TourRoute = Router();
+import {
+    getAllTourController,
+    bookTourController,
+    getMyBookingController,
+    rescheduleTourController,
+    cancelTourController,
+    getReviewByIdController,
+    addReviewController
+}
 
-TourRoute.route('/tours').get()
-TourRoute.route('/tours/book').post()
-TourRoute.route('/tours/my-bookings').get()
-TourRoute.route('/tours/reschedule/:id').put()
-TourRoute.route('/tours/cancel/:id').delete()
-TourRoute.route('/tours/reviews/:id').get()
-TourRoute.route('/tours/add-reviews/:id').post()
+from "../controllers/tour.controllers.js"
+
+TourRoute.route('/tours').get(getAllTourController)
+TourRoute.route('/tours/book').post(authMiddleware,bookTourController)
+TourRoute.route('/tours/my-bookings').get(authMiddleware,getMyBookingController)
+TourRoute.route('/tours/reschedule/:tourId').put(rescheduleTourController)
+TourRoute.route('/tours/cancel/:tourId').delete(cancelTourController)
+TourRoute.route('/tours/reviews/:tourId').get(getReviewByIdController)
+TourRoute.route('/tours/add-reviews/:tourId').post(authMiddleware,addReviewController)
 
 
 // unique features
