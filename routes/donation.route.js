@@ -1,12 +1,26 @@
 import { Router } from "express";
 const donationRoute = Router();
+import {
+    getAllDonationController,
+    addnewDonationController,
+    getMyDonationController,
+    getDonationUtilization
+}
 
-donationRoute.route('/donations').get();
-donationRoute.route('/donations/make').post();
-donationRoute.route('/donations/my-donations').get();
+from "../controllers/donations.controllers.js"
+
+import {
+    authMiddleware,
+    authorizeRoles,
+  } from "../middlewares/authMiddleware.js";
+  
+
+donationRoute.route('/donations').get(getAllDonationController);
+donationRoute.route('/donations/make').post(authMiddleware,addnewDonationController);
+donationRoute.route('/donations/my-donations/:donationId').get(getMyDonationController);
 
 // unique features
-donationRoute.route('/donations/utilization').get(); 
+donationRoute.route('/donations/utilization').get(getDonationUtilization); 
 // this to have real time fund utilization
 
 

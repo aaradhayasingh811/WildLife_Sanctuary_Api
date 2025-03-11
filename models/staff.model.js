@@ -12,8 +12,13 @@ const StaffSchema = new mongoose.Schema({
     },
     role: {
       type: String,
-      required: true, // Role of staff (e.g., Animal Care, Guide)
+      enum:["Staff","Volunteer"], // Role of staff (e.g., Animal Care, Guide)
     },
+    specificRole :{
+      type:String,
+      required : true
+    }
+    ,
     contactInfo: {
       type: String,
       required: true, // Contact number or email

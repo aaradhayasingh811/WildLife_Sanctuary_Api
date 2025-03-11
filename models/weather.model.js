@@ -1,45 +1,16 @@
 import mongoose from "mongoose";
+
 const WeatherSchema = new mongoose.Schema({
-    weatherId: {
-      type: String,
-      unique: true,
-      required: true, // Unique weather record ID
-    },
-    temperature: {
-      type: Number,
-      required: true, // Temperature in Celsius
-    },
-    humidity: {
-      type: Number,
-      required: true, // Humidity percentage
-    },
-    windSpeed: {
-      type: Number,
-      required: true, // Wind speed in km/h
-    },
-    windDirection: {
-      type: String, // Wind direction (N, NE, E, SE, etc.)
-    },
-    rainfall: {
-      type: Number,
-      required: true, // Rainfall in mm
-    },
-    airQuality: {
-      type: String,
-      enum: ['Good', 'Moderate', 'Unhealthy', 'Hazardous'],
-      default: 'Good', // Air quality rating
-    },
-    location: {
-      type: [Number], 
-      required: true, // Location coordinates [longitude, latitude]
-    },
-    timestamp: {
-      type: Date,
-      default: Date.now, // Timestamp of the weather observation
-    },
-  });
+    weatherId: { type: String, unique: true, required: true },
+    temperature: { type: Number, required: true },
+    humidity: { type: Number, required: true },
+    windSpeed: { type: Number, required: true },
+    windDirection: { type: String },
+    rainfall: { type: Number, required: true },
+    airQuality: { type: String, enum: ['Good', 'Moderate', 'Unhealthy', 'Hazardous'], default: 'Good' },
+    location: { type: [Number], required: true },
+    timestamp: { type: Date, default: Date.now },
+});
 
-  
-
-const Weather = mongoose.model("Weather",WeatherSchema)
-export default Weather
+const Weather = mongoose.model("Weather", WeatherSchema);
+export default Weather;

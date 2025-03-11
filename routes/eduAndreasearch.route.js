@@ -1,14 +1,43 @@
+// --- ROUTES ---
 import { Router } from "express";
+import {
+    getAllArticles,
+    getArticleById,
+    createArticle,
+    addComment,
+    getAllResearch,
+    getResearchById,
+    createResearch,
+    getAllQuizzes,
+    getRandomQuiz,
+    createQuiz,
+    getAllLiveCams,
+    getLiveCamById,
+    createLiveCam
+} from "../controllers/eduController.js";
+import { authMiddleware, authorizeRoles } from "../middlewares/authMiddleware.js";
+
 const EduRoute = Router();
 
-EduRoute.route('/education/articles').get();
-EduRoute.route('/education/articles/:id').get();
-EduRoute.route('/education/add-articles').post();
-EduRoute.route('/research/publications').get();
+// Articles
+EduRoute.get('/education/articles', getAllArticles);
+EduRoute.get('/education/articles/:id', getArticleById);
+EduRoute.post('/education/articles', authMiddleware, authorizeRoles('Staff', 'Admin'), createArticle);
+EduRoute.post('/education/articles/:id/comment', authMiddleware, addComment);
 
-// unique features
-EduRoute.route('/education/live-cam').get();
+// Research
+EduRoute.get('/research/publications', getAllResearch);
+EduRoute.get('/research/publications/:id', getResearchById);
+EduRoute.post('/research/publications', authMiddleware, authorizeRoles('Staff', 'Admin'), createResearch);
 
+// Quizzes
+EduRoute.get('/education/quizzes', getAllQuizzes);
+EduRoute.get('/education/quiz/random', getRandomQuiz);
+EduRoute.post('/education/quizzes', authMiddleware, authorizeRoles('Admin'), createQuiz);
 
+// Live Cams
+EduRoute.get('/education/live-cams', getAllLiveCams);
+EduRoute.get('/education/live-cams/:id', getLiveCamById);
+EduRoute.post('/education/live-cams', authMiddleware, authorizeRoles('Admin'), createLiveCam);
 
-export  {EduRoute}
+export default EduRoute;

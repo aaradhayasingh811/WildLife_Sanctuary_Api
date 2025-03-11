@@ -1,27 +1,29 @@
 import { Router } from "express";
 const StaffRoute = Router();
 
-StaffRoute.route('/staff').get();
-StaffRoute.route('/staff/:id').get();
-StaffRoute.route('/add-staff').post();
-StaffRoute.route('/update-staff/:id').put();
-StaffRoute.route('/delete-staff/:id').delete();
-StaffRoute.route('/volunteer-apply').post();
-StaffRoute.route('/volunteer').get();
+import {
+  getAllStaffController,
+  getStaffByIdController,
+  addNewStaffController,
+  updateDetailsController,
+  deleteStaffByIdController,
+  getAllVolunteerController
+} from "../controllers/staff&volun.controllers.js";
+import {
+  authMiddleware,
+  authorizeRoles,
+} from "../middlewares/authMiddleware.js";
 
+StaffRoute.route("/staff").get(getAllStaffController);
+StaffRoute.route("/staff/:id").get(getStaffByIdController);
+StaffRoute.route("/add-staff").post(authMiddleware, addNewStaffController);
+StaffRoute.route("/update-staff/:id").put(updateDetailsController);
+StaffRoute.route("/delete-staff/:id").delete(authMiddleware , deleteStaffByIdController);
+StaffRoute.route("/volunteer").get(getAllVolunteerController);
 
 // unique features
-StaffRoute.route('/volunteer/match').get();
-StaffRoute.route('/staff/shifts').get();
-StaffRoute.route('/staff/notifications').post();
+StaffRoute.route("/volunteer/match").get();
+StaffRoute.route("/staff/add-shifts/:id").post(authMiddleware);
+StaffRoute.route("/staff/notifications").post();
 
-
-
-
-
-
-
-
-
-
-export {StaffRoute}
+export { StaffRoute };

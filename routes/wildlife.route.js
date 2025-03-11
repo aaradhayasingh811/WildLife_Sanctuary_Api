@@ -2,7 +2,6 @@ import { Router } from "express";
 const WildlifeRoute = Router();
 import {
   authMiddleware,
-  authorizeRoles,
 } from "../middlewares/authMiddleware.js";
 import {
   getAllAnimalsController,
@@ -12,28 +11,22 @@ import {
   deleteAnimalController,
   allEndangeredController,
   filterbyEndangeredStatusController,
+  getGpsTrackingController,
+  getPopulationStatsController,
+  healthCheckController,
+  getPaginatedAnimalsController
 } from "../controllers/wildlife.controllers.js";
 
 WildlifeRoute.route("/wildlife").get(getAllAnimalsController);
 WildlifeRoute.route("/wildlife/:animalId").get(getAnimalByIdController);
 WildlifeRoute.route("/add-wildlife").post(authMiddleware, addAnimalController);
-WildlifeRoute.route("/update-wildlife/:animalId").put(
-  authMiddleware,
-  updateAnimalDetailsController
-);
-WildlifeRoute.route("/delete-wildlife/:animalId").delete(
-  authMiddleware,
-  deleteAnimalController
-);
-
-// unique feature endpoint gps
-WildlifeRoute.route("/wildlife/gps-tracking/:animalId").get(); //gps tracking
-WildlifeRoute.route("/wildlife/population-stats").get(); //Get population trends of species
-WildlifeRoute.route("/wildlife/health-check").post(); //ai based health check up
+WildlifeRoute.route("/update-wildlife/:animalId").put(authMiddleware, updateAnimalDetailsController);
+WildlifeRoute.route("/delete-wildlife/:animalId").delete(authMiddleware, deleteAnimalController);
 WildlifeRoute.route("/wildlife/endangered").get(allEndangeredController);
-WildlifeRoute.route("/wildlife/filter/:endangeredStatus").get(
-  filterbyEndangeredStatusController
-); //filter
-WildlifeRoute.route("/wildlife/paginated").get();
+WildlifeRoute.route("/wildlife/filter/:endangeredStatus").get(filterbyEndangeredStatusController);
+WildlifeRoute.route("/wildlife/gps-tracking/:animalId").get(getGpsTrackingController);
+WildlifeRoute.route("/wildlife/population-stats").get(getPopulationStatsController);
+WildlifeRoute.route("/wildlife/health-check").post(authMiddleware, healthCheckController);
+WildlifeRoute.route("/wildlife/paginated").get(getPaginatedAnimalsController);
 
 export { WildlifeRoute };
