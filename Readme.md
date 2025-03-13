@@ -224,20 +224,10 @@ This API is built using the following technologies:
 <img src="/images/add_wildlife.png" alt="" >
 
 
-### **GET /wildlife/endangered** - Get Endangered Species
-- **Response:** Returns all endangered species.
-<!-- <img src="/images" alt="" > -->
-
-
 ### **GET /wildlife/gps-tracking/:animalId** - Get GPS Tracking
 - **Parameters:** `animalId`
 - **Response:** Returns real-time GPS tracking data.
-<!-- <img src="/images" alt="" > -->
-
-
-### **GET /wildlife/population-stats** - Get Population Statistics
-- **Response:** Returns wildlife population data.
-<!-- <img src="/images/" alt="" > -->
+<img src="/images/gps tracking.png" alt="" >
 
 
 ### **POST /wildlife/health-check** - Submit Animal Health Check

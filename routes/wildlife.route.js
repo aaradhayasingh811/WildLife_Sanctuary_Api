@@ -12,9 +12,9 @@ import {
   allEndangeredController,
   filterbyEndangeredStatusController,
   getGpsTrackingController,
-  getPopulationStatsController,
+  PopulationStatsController,
   healthCheckController,
-  getPaginatedAnimalsController
+  getAllEndagnered
 } from "../controllers/wildlife.controllers.js";
 
 WildlifeRoute.route("/wildlife").get(getAllAnimalsController);
@@ -22,15 +22,11 @@ WildlifeRoute.route("/wildlife/:animalId").get(getAnimalByIdController);
 WildlifeRoute.route("/add-wildlife").post(authMiddleware, addAnimalController);
 WildlifeRoute.route("/update-wildlife/:animalId").put(authMiddleware, updateAnimalDetailsController);
 WildlifeRoute.route("/delete-wildlife/:animalId").delete(authMiddleware, deleteAnimalController);
-// check
-WildlifeRoute.route("/wildlife/endangered").get(allEndangeredController);
 WildlifeRoute.route("/wildlife/filter/:endangeredStatus").get(filterbyEndangeredStatusController);
-// check
 WildlifeRoute.route("/wildlife/gps-tracking/:animalId").get(getGpsTrackingController);
-// check
-WildlifeRoute.route("/wildlife/population-stats").get(getPopulationStatsController);
+// not working
+WildlifeRoute.route("/wildlife/population-stats").get(PopulationStatsController);
 WildlifeRoute.route("/wildlife/health-check").post(authMiddleware, healthCheckController);
-// check
-WildlifeRoute.route("/wildlife/paginated").get(getPaginatedAnimalsController);
+
 
 export { WildlifeRoute };

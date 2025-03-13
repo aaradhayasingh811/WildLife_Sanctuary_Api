@@ -1,4 +1,5 @@
-import Animal from "../models/animal.model.js";
+// import Animal from "../models/animal.model.js";
+import Animal from "../models/animal.model.js"
 import User from "../models/user.model.js";
 import jwt from "jsonwebtoken";
 import { v4 as uuidv4 } from "uuid";
@@ -106,11 +107,27 @@ const allEndangeredController = async (req, res) => {
   }
 };
 
+export const getAllEndagnered = async(req,res) =>{
+  try {
+    console.log("hii")
+    const animal = await Animal.find({
+      endangeredStatus: "Endangered"
+    });
+    if (!animal.length) {
+      return res.status(404).json({ message: "No endangered animals found" });
+    }
+    res.json({message:"All endangered animal:",animal});
+    
+  } catch (error) {
+    res.status(500).json({ message: "Error in retrieving endangered animals", error });
+
+  }
+}
 // Filter by endangered status
 const filterbyEndangeredStatusController = async (req, res) => {
   try {
     const { endangeredStatus } = req.params;
-    const animals = await Animal.find({ endangeredStatus });
+    const animals = await Animal.find({ endangeredStatus :"Endangered" });
     if (!animals.length) {
       return res.status(404).json({ message: "No animals found with this status" });
     }
@@ -123,9 +140,12 @@ const filterbyEndangeredStatusController = async (req, res) => {
 // GPS Tracking
 const getGpsTrackingController = async (req, res) => {
   try {
-    const { animalId } = req.params;
-    const animal = await Animal.findOne({ animalId });
-    console.log(animal)
+    const id = req.params.animalId;
+    const trimmedAnimalId = id.trim();
+    // console.log(trimmedAnimalId)
+    const animal = await Animal.findOne({ _id:trimmedAnimalId });
+    
+    // console.log(animal)
     if (!animal || !animal.gpsLocation) {
       return res.status(404).json({ message: "No GPS data available" });
     }
@@ -136,16 +156,32 @@ const getGpsTrackingController = async (req, res) => {
 };
 
 // Population Statistics
-const getPopulationStatsController = async (req, res) => {
+// const getPopulationStatsController = async (req, res) => {
+//   try {
+//     const stats = await Animal.aggregate([
+//       { $group: { _id: "$species", count: { $sum: 1 } } }
+//     ]);
+//     res.json(stats);
+//   } catch (error) {
+//     res.status(500).json({ message: "Error retrieving population stats", error });
+//   }
+// };
+
+const PopulationStatsController = async (req, res) => {
+  console.log("Received request for population stats");
   try {
     const stats = await Animal.aggregate([
-      { $group: { _id: "$species", count: { $sum: 1 } } }
+      { $group: { _id: { $ifNull: ["$species", "Unknown"] }, count: { $sum: 1 } } }
+
     ]);
+    console.log("Aggregation Result:", stats);
     res.json(stats);
   } catch (error) {
+    console.error("Aggregation Error:", error);
     res.status(500).json({ message: "Error retrieving population stats", error });
   }
 };
+
 
 // AI-Based Health Checkup (Mock Implementation)
 const healthCheckController = async (req, res) => {
@@ -195,7 +231,7 @@ export {
   allEndangeredController,
   filterbyEndangeredStatusController,
   getGpsTrackingController,
-  getPopulationStatsController,
+  PopulationStatsController,
   healthCheckController,
   getPaginatedAnimalsController,
 };
