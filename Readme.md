@@ -7,15 +7,16 @@ This API is designed for staff, researchers, volunteers, and the public to inter
 
 ## **Technology Stack**
 This API is built using the following technologies:
-- **Backend Framework:** Express.js
-- **Database:** MongoDB with Mongoose
-- **Authentication & Security:** JSON Web Tokens (JWT), bcryptjs
-- **File Handling:** Multer, Sharp
-- **Email Services:** Nodemailer
-- **Data Validation:** Express Validator, Validator.js
-- **Rate Limiting & Security:** Express-rate-limit, Cookie-parser
-- **Environment Variables:** Dotenv
-- **Other Utilities:** Axios, UUID, Moment.js, CORS, Body-parser
+
+- **Backend Framework:** ![Express.js](https://upload.wikimedia.org/wikipedia/commons/thumb/6/64/Expressjs.png/800px-Expressjs.png) Express.js
+- **Database:** ![MongoDB](https://upload.wikimedia.org/wikipedia/commons/4/45/MongoDB_Logo_2022.svg) MongoDB with Mongoose
+- **Authentication & Security:** ![JWT](https://upload.wikimedia.org/wikipedia/commons/thumb/2/2e/JSON_Web_Token_logo.svg/800px-JSON_Web_Token_logo.svg.png), ![bcryptjs](https://www.bcryptjs.com/img/logo.svg) bcryptjs
+- **File Handling:** ![Multer](https://avatars.githubusercontent.com/u/10393572?s=200&v=4), ![Sharp](https://avatars.githubusercontent.com/u/3278766?s=200&v=4) Multer, Sharp
+- **Email Services:** ![Nodemailer](https://nodemailer.com/assets/logo-hero-3c76d7c4444c66f6bfb4fba1b63560ad38b7ac4894ef1b5b5f49ed8c03a505cf.svg) Nodemailer
+- **Data Validation:** ![Express Validator](https://express-validator.github.io/assets/img/logo.png), ![Validator.js](https://raw.githubusercontent.com/validatorjs/validator.js/master/logo.svg) Express Validator, Validator.js
+- **Rate Limiting & Security:** ![Express-rate-limit](https://raw.githubusercontent.com/Smart-City-Monorepo/express-rate-limit/master/docs/express-rate-limit-logo.svg), ![Cookie-parser](https://raw.githubusercontent.com/expressjs/cookie-parser/master/public/images/cookieparser-logo.png) Express-rate-limit, Cookie-parser
+- **Environment Variables:** ![Dotenv](https://raw.githubusercontent.com/motdotla/dotenv/master/dotenv.png) Dotenv
+- **Other Utilities:** ![Axios](https://upload.wikimedia.org/wikipedia/commons/6/62/Axios_logo.svg), ![UUID](https://upload.wikimedia.org/wikipedia/commons/d/d3/Uuid.svg) UUID, Moment.js, CORS, Body-parser
 
 ---
 ## **1. Donations API**
