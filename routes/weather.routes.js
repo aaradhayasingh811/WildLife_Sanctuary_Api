@@ -13,4 +13,4 @@ WeatherRoute.route("/weather/forecast").get(getWeatherForecast);
 WeatherRoute.route("/weather/climate-tracker").get(getClimateTracker);
 WeatherRoute.route("/weather/wildlife-alerts").get(getWildlifeAlerts);
 
-export default WeatherRoute;
+export  {WeatherRoute};

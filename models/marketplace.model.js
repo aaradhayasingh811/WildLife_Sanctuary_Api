@@ -13,7 +13,7 @@ export const Product = mongoose.model('Product', ProductSchema);
 
 // models/Order.js
 const OrderSchema = new mongoose.Schema({
-    user: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
+    userId: { type: "String" , required:true},
     products: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Product' }],
     totalPrice: Number,
     status: { type: String, default: 'Pending' }
@@ -24,7 +24,7 @@ export const Order = mongoose.model('Order', OrderSchema);
 // models/Review.js
 const ReviewSchema = new mongoose.Schema({
     product: { type: mongoose.Schema.Types.ObjectId, ref: 'Product' },
-    user: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
+    userId: { type: "String" , required:true},
     rating: Number,
     comment: String
 });

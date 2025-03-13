@@ -22,11 +22,4 @@ TourRoute.route('/tours/reviews/:tourId').get(getReviewByIdController)
 TourRoute.route('/tours/add-reviews/:tourId').post(authMiddleware,addReviewController)
 
 
-// unique features
-// TourRoute.route('/tours/ai-recommendations').get()
-// TourRoute.route('/tours/virtual-tour').get()
-// TourRoute.route('/tours/smart-guide/:id').get()
-
-
-
 export {TourRoute}

@@ -44,6 +44,12 @@ const UserSchema = new mongoose.Schema({
       type: Date,
       default: Date.now, // Last updated timestamp
     },
+    accessToken:{
+      type:String
+    },
+    refreshToken:{
+      type:String
+    }
   });
   
 

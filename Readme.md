@@ -23,6 +23,8 @@ This API is built using the following technologies:
 - **Description:** Fetches all donation records.
 - **Access Control:** Public
 - **Response:** Returns an array of all donations.
+<img src="/images/get_all_doantion.png" alt="" >
+
 
 ### **POST /donations/make** - Make a Donation
 - **Description:** Allows authenticated users to make a donation.
@@ -42,9 +44,7 @@ This API is built using the following technologies:
 - **Parameters:** `donationId`
 - **Response:** Returns the donation details.
 
-### **GET /donations/utilization** - View Fund Utilization
-- **Description:** Provides real-time updates on how donations are used.
-- **Response:** Returns utilization details.
+
 
 ---
 ## **2. Education API**

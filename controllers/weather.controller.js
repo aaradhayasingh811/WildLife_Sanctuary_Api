@@ -1,6 +1,6 @@
 import axios from "axios";
 import dotenv from "dotenv";
-import Weather from "../models/Weather.js";
+import Weather from "../models/weather.model.js";
 
 dotenv.config();
 const API_KEY = process.env.WEATHER_API_KEY;

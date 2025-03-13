@@ -125,6 +125,7 @@ const getGpsTrackingController = async (req, res) => {
   try {
     const { animalId } = req.params;
     const animal = await Animal.findOne({ animalId });
+    console.log(animal)
     if (!animal || !animal.gpsLocation) {
       return res.status(404).json({ message: "No GPS data available" });
     }
@@ -164,15 +165,26 @@ const healthCheckController = async (req, res) => {
 // Paginated List of Animals
 const getPaginatedAnimalsController = async (req, res) => {
   try {
-    const { page = 1, limit = 10 } = req.query;
+    const pageNumber = Number(req.query.page) || 1;
+    const limitNumber = Number(req.query.limit) || 10;
+
+    if (isNaN(pageNumber) || isNaN(limitNumber) || pageNumber < 1 || limitNumber < 1) {
+      return res.status(400).json({ message: "Invalid page or limit values" });
+    }
+
+    console.log("Fetching page:", pageNumber, "Limit:", limitNumber);
+
     const animals = await Animal.find()
-      .limit(Number(limit))
-      .skip((Number(page) - 1) * Number(limit));
+      .limit(limitNumber)
+      .skip((pageNumber - 1) * limitNumber);
+
     res.json(animals);
   } catch (error) {
+    console.error("Error retrieving paginated animals:", error);
     res.status(500).json({ message: "Error retrieving paginated animals", error });
   }
 };
+
 
 export {
   getAllAnimalsController,

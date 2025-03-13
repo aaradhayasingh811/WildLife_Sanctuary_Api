@@ -22,11 +22,15 @@ WildlifeRoute.route("/wildlife/:animalId").get(getAnimalByIdController);
 WildlifeRoute.route("/add-wildlife").post(authMiddleware, addAnimalController);
 WildlifeRoute.route("/update-wildlife/:animalId").put(authMiddleware, updateAnimalDetailsController);
 WildlifeRoute.route("/delete-wildlife/:animalId").delete(authMiddleware, deleteAnimalController);
+// check
 WildlifeRoute.route("/wildlife/endangered").get(allEndangeredController);
 WildlifeRoute.route("/wildlife/filter/:endangeredStatus").get(filterbyEndangeredStatusController);
+// check
 WildlifeRoute.route("/wildlife/gps-tracking/:animalId").get(getGpsTrackingController);
+// check
 WildlifeRoute.route("/wildlife/population-stats").get(getPopulationStatsController);
 WildlifeRoute.route("/wildlife/health-check").post(authMiddleware, healthCheckController);
+// check
 WildlifeRoute.route("/wildlife/paginated").get(getPaginatedAnimalsController);
 
 export { WildlifeRoute };

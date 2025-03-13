@@ -2,6 +2,7 @@ import Article from "../models/article.model.js"
 import Research from "../models/research.model.js"
 import Quiz from "../models/eduQuiz.js"
 import LiveCam from "../models/livecam.js"
+import User from "../models/user.model.js";
 // Get all articles
 const getAllArticles = async (req, res) => {
     try {
@@ -29,11 +30,15 @@ const getArticleById = async (req, res) => {
 // Create a new article (Only Staff/Admin)
 const createArticle = async (req, res) => {
     try {
-        if (req.user.role !== 'Staff' && req.user.role !== 'Admin') {
+        const {userId} = req.user;
+        const user = await User.findOne({
+            userId
+        })
+        if (user.role !== 'Staff' && user.role !== 'Admin') {
             return res.status(403).json({ message: "Access denied" });
         }
 
-        const newArticle = new Article({ ...req.body, author: req.user.id });
+        const newArticle = new Article({ ...req.body });
         await newArticle.save();
         res.status(201).json(newArticle);
     } catch (error) {
@@ -44,10 +49,11 @@ const createArticle = async (req, res) => {
 // Add a comment to an article
 const addComment = async (req, res) => {
     try {
+        const {userId} = req.user;
         const article = await Article.findById(req.params.id);
         if (!article) return res.status(404).json({ message: "Article not found" });
 
-        article.comments.push({ user: req.user.id, comment: req.body.comment });
+        article.comments.push({ userId, comment: req.body.comment });
         await article.save();
         res.status(200).json({ message: "Comment added", article });
     } catch (error) {
@@ -83,7 +89,11 @@ const getResearchById = async (req, res) => {
 // Create a new research publication (Only Staff/Admin)
 const createResearch = async (req, res) => {
     try {
-        if (req.user.role !== 'Staff' && req.user.role !== 'Admin') {
+        const {userId} = req.user;
+        const user = await User.findOne({
+            userId
+        })
+        if (user.role !== 'Staff' && user.role !== 'Admin') {
             return res.status(403).json({ message: "Access denied" });
         }
 
@@ -124,7 +134,11 @@ const getRandomQuiz = async (req, res) => {
 // Add a new quiz question (Only Admin)
 const createQuiz = async (req, res) => {
     try {
-        if (req.user.role !== 'Admin') {
+        const {userId} = req.user;
+        const user = await User.findOne({
+            userId
+        })
+        if (user.role !== 'Admin') {
             return res.status(403).json({ message: "Access denied" });
         }
 
@@ -161,7 +175,11 @@ const getLiveCamById = async (req, res) => {
 // Add a new live cam (Only Admin)
 const createLiveCam = async (req, res) => {
     try {
-        if (req.user.role !== 'Admin') {
+        const {userId} = req.user;
+        const user = await User.findOne({
+            userId
+        })
+        if (user.role !== 'Admin') {
             return res.status(403).json({ message: "Access denied" });
         }
 

@@ -7,7 +7,10 @@ import {
   addNewStaffController,
   updateDetailsController,
   deleteStaffByIdController,
-  getAllVolunteerController
+  getAllVolunteerController,
+  addShiftController,
+  staffNotificationsController,
+  volunteerMatchController
 } from "../controllers/staff&volun.controllers.js";
 import {
   authMiddleware,
@@ -22,8 +25,8 @@ StaffRoute.route("/delete-staff/:id").delete(authMiddleware , deleteStaffByIdCon
 StaffRoute.route("/volunteer").get(getAllVolunteerController);
 
 // unique features
-StaffRoute.route("/volunteer/match").get();
-StaffRoute.route("/staff/add-shifts/:id").post(authMiddleware);
-StaffRoute.route("/staff/notifications").post();
+StaffRoute.route("/volunteer/match").get(volunteerMatchController);
+StaffRoute.route("/staff/add-shifts/:id").post(authMiddleware,addShiftController);
+StaffRoute.route("/staff/notifications").post(staffNotificationsController);
 
 export { StaffRoute };

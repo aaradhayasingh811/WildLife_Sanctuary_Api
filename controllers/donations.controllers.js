@@ -1,4 +1,4 @@
-import User from "../models/staff.model.js";
+import User from "../models/user.model.js";
 import Donation from "../models/donation.model.js";
 import { v4 as uuidv4 } from "uuid";
 
@@ -17,14 +17,14 @@ const getAllDonationController = async(req , res) =>{
 
 const addnewDonationController = async(req,res) =>{
     try {
-        const id = req.user.userID;
-        const userID = await User.findOne({userID:id});
+        const id = req.user.userId;
+        const user = await User.findOne({userId:id});
         const donationId = uuidv4();
         const donorId = uuidv4();
         const { amount , projectId , donationType , donationDate} = req.body;
         const newDonation = new Donation({
             donationId : donationId ,
-            userId : userID,
+            userId : user,
             donorId : donorId ,
             amount : amount ,
             donationDate : donationDate,
@@ -33,7 +33,10 @@ const addnewDonationController = async(req,res) =>{
         if(projectId){
             newDonation.projectId = projectId;
         }
-        const savedDonation = await newDonation.save();
+        // console.log("hii")
+        const savedDonation = await newDonation.save({
+            validateBeforeSave:false
+        });
         res.status(201).json({message : "Donation Added Successfully",savedDonation});
 
         
@@ -44,11 +47,13 @@ const addnewDonationController = async(req,res) =>{
 
 const getMyDonationController = async(req,res) =>{
     try {
-        const donationId = req.params;
+        const donationId = req.params.donationId;
         if(!donationId){
             return res.status(404).json({message : "No donation found"});
         }
-        const donation = await Donation.find({donationId:id});
+        console.log(donationId)
+        const donation = await Donation.find({donationId:donationId});
+        console.log(donation)
         if(donation.length === 0){
             return res.status(404).json({message : "No donation found"});
         }
