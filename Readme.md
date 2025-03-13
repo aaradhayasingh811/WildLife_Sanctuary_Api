@@ -1,9 +1,30 @@
-# Wildlife Sanctuary API Documentation
+# 🫏Wildlife Sanctuary API Documentation
 
-## Overview
-The Wildlife Sanctuary API provides endpoints for managing donations, education resources, research, emergency alerts, marketplace, staff and volunteers, tours, user authentication, weather information, and wildlife data.
+---
 
-This API is designed for staff, researchers, volunteers, and the public to interact with the sanctuary's digital ecosystem.
+## **Overview**  
+The **Wildlife Sanctuary API** is a comprehensive system designed to facilitate the management, monitoring, and engagement of activities within a wildlife sanctuary. It provides structured endpoints for various stakeholders, including staff, researchers, volunteers, and visitors, ensuring seamless interaction with the sanctuary’s digital ecosystem.  
+
+### **Key Features:**  
+- **Donations Management:** Allows users to make, track, and manage donations supporting wildlife conservation efforts.  
+- **Educational Resources:** Offers articles, quizzes, live cams, and interactive learning experiences for the public and researchers.  
+- **Research & Wildlife Tracking:** Enables wildlife researchers to monitor and update data on different species, including GPS tracking.  
+- **Emergency Alerts & AI Risk Detection:** Provides real-time alerts for poaching, distress situations, and environmental threats with AI-assisted risk analysis.  
+- **Marketplace:** A platform for purchasing eco-friendly products, sanctuary souvenirs, and booking guided tours.  
+- **Staff & Volunteer Coordination:** Facilitates task assignments, shift scheduling, and communication among sanctuary personnel and volunteers.  
+- **Tour & Ticketing System:** Manages visitor tours, bookings, cancellations, and reviews to enhance visitor experience.  
+- **User Authentication & Roles:** Implements secure user authentication with role-based access control for administrators, staff, volunteers, and the public.  
+- **Weather & Climate Monitoring:** Provides real-time weather updates, forecasts, and climate change analysis for sanctuary management and visitor safety.  
+
+### **Target Users:**  
+- **Sanctuary Staff & Administrators:** Manage operations, schedules, and communication within the sanctuary.  
+- **Researchers & Conservationists:** Access wildlife data, track animals, and report conservation findings.  
+- **Volunteers & Donors:** Support sanctuary efforts by volunteering, donating, or purchasing sustainable products.  
+- **Visitors & Tourists:** Explore educational content, book guided tours, and engage with wildlife conservation initiatives.  
+
+The **Wildlife Sanctuary API** aims to enhance conservation efforts by leveraging technology to streamline operations, foster engagement, and ensure the safety and well-being of both wildlife and visitors.  
+
+
 
 ## **Technology Stack**
 This API is built using the following technologies:
@@ -17,7 +38,51 @@ This API is built using the following technologies:
 - **Environment Variables:** Dotenv
 - **Other Utilities:** Axios, UUID, Moment.js, CORS, Body-parser
 
+
+## Base URL
+```
+https://wildlife-sanctuary-api.onrender.com/api/v1/{endpoints}
+```
+
+## Getting Started
+
+### Prerequisites
+Ensure you have the following installed:
+- **Node.js** (>= 14.x)
+- **MongoDB** (if running locally)
+
+### Installation
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/your-repo.git
+   cd your-repo
+   ```
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+3. Create a `.env` file and configure your environment variables:
+   ```env
+   PORT=3000
+   MONGO_URI=your_mongodb_connection_string
+   SECRET_KEY=your_secret_key
+   REFRESH_SECRET=refresh_secret_key
+   CLIENT_URL=url
+   NODE_ENV=production 
+   WEATHER_API_KEY=weather_api_from_openmap
+
+   ```
+4. Start the server:
+   ```bash
+   npm start
+   ```
+
+## API Usage
+All endpoints must be prefixed with `/api/v1`.
+
 ---
+
+
 ## **1. Donations API**
 ### **GET /donations** - Get All Donations
 - **Description:** Fetches all donation records.
